@@ -11,6 +11,19 @@ import cv2 as cv, numpy as np, os
 #
 #······················································································
 
+output_file_name = input (">> Write the output file name: ")
+
+if output_file_name in os.listdir():
+    print ("That file already exists. It will be overwritten." )
+    while True:
+        safety_flag = input ("Type YES if you want to continue. Type NO to abort: ")
+
+        if safety_flag == "YES":
+            break
+        elif safety_flag == "NO":
+            quit
+
+
 
 # We set some costants.
 image_folder = "tests"          # Name of the folder where you will put the images
@@ -57,18 +70,15 @@ for image in images:
     counter_i += 1
     counter_j += 1
 
-    white_image [px_height:px_height_end, px_width:px_width_end] = chat_log
-    cv.imshow("displayer", white_image)                                                # Debugging lines
-    k = cv.waitKey(0)  
+    white_image [px_height:px_height_end, px_width:px_width_end] = chat_log          # We paste the chat_log
 
 
-
-
+#
+# This are the coords in which the images should be pasted.
+#
 # [0:1025, 0:360]     [0:1025, 360:720] ...
 # [1025: 2050, 0:360] [1025: 2050, 360, 720] ...
 
-cv.imshow("displayer", white_image)
-k = cv.waitKey(0)
 cv.imwrite("log.png", white_image)
 
 
